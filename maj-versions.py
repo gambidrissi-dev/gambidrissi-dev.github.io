@@ -13,14 +13,29 @@ Une app sans release, ou dont la carte ne porte pas de version, est laissée
 telle quelle : toutes n'en publient pas, et inventer un numéro serait pire
 que de n'en afficher aucun.
 """
-import json, re, subprocess, sys
+import re, subprocess, sys
 
 PAGE = "index.html"
 
+# Le nom affiché sur la carte sert à deviner le dépôt `<nom>-Share`. GitHub
+# ignore la casse, donc « Macropad » retrouve MACROPAD-Share tout seul — mais
+# six apps ont été renommées côté vitrine sans que le dépôt suive. Sans cette
+# table, leur carte affichait une version figée que rien ne resynchronisait,
+# c'est-à-dire exactement le problème que ce script existe pour régler.
+DEPOTS = {
+    "DiskStats": "STATVIEWER",
+    "CobaltNotch": "ULTRANOTCH",
+    "Au Propre": "DICTIA",
+    "VoiceStudio": "VOICE-STUDIO",
+    "SurfaceCobalt": "Surface-Cobalt",
+    "GambiOS": "GAMBI_OS_MAC",
+}
+
 
 def derniere_version(app):
+    depot = DEPOTS.get(app, app)
     r = subprocess.run(
-        ["gh", "release", "view", "--repo", f"gambidrissi-dev/{app}-Share",
+        ["gh", "release", "view", "--repo", f"gambidrissi-dev/{depot}-Share",
          "--json", "tagName", "-q", ".tagName"],
         capture_output=True, text=True)
     tag = r.stdout.strip()
