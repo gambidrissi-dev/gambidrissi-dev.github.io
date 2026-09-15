@@ -24,7 +24,6 @@ PAGE = "index.html"
 # c'est-à-dire exactement le problème que ce script existe pour régler.
 DEPOTS = {
     "DiskStats": "STATVIEWER",
-    "CobaltNotch": "ULTRANOTCH",
     "Au Propre": "DICTIA",
     "VoiceStudio": "VOICE-STUDIO",
     "SurfaceCobalt": "Surface-Cobalt",
