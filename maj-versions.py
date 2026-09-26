@@ -28,6 +28,7 @@ DEPOTS = {
     "VoiceStudio": "VOICE-STUDIO",
     "SurfaceCobalt": "Surface-Cobalt",
     "GambiOS": "GAMBI_OS_MAC",
+    "THE OFFICE": "THE-OFFICE",
 }
 
 
